@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your ToDos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-3 p-1">
+    <a class="navbar-brand m-1" href="https://courses.in28minutes.com">in28Minutes</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/list-todos">Todos</a></li>
+        </ul>
+    </div>
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <table class="table table-bordered table-striped">
+
+        <thead class="thead-dark">
+        <tr>
+            <th>Description</th>
+            <th>End date</th>
+            <th>Is done?</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tr th:each="todos : ${todos}">
+            <td th:text="${todos.name}"/>
+            <td th:text="${todos.endDate}"/>
+            <td th:text="${todos.completed}"/>
+            <td th:align="center">
+                <form action="#" th:action="@{/delete-todo}" method="POST">
+                    <input type="hidden" name="todoId" th:value="${todos.id}"/>
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="if (!(confirm('Are you sure you want to delete this Todo?'))) return false">
+                        Delete
+                    </button>
+                </form>
+            </td>
+            <td th:align="center">
+                <form action="#" th:action="@{/update-todo}" method="POST">
+                    <input type="hidden" name="todoId" th:value="${todos.id}"/>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        Update
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <a href="add-todos" class="btn btn-success">Add Todo</a>
+</div>
+</body>
+</html>

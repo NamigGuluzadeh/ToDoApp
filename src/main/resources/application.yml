@@ -1,0 +1,20 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  mvc:
+    format:
+      date: yyyy-MM-dd
+
+  datasource:
+    url: jdbc:mysqlhttp://localhost:3307/todos
+    username: todos-user
+    password: dummytodos
+  jooq:
+    sql-dialect: org.hibernate.dialect.MySQL8Dialect
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+
